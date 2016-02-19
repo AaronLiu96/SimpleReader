@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SimpleReader</string>
+
+
+    <!--主页内容-->
+    <string name="Stories">段子</string>
+    <string name="Essay">短文</string>
+    <string name="friend">空间</string>
+    <string name="mine">我的</string>
+
+    <!--故事内容-->
+    <string name="reply">吐槽</string>
+
+    <!--文章内容-->
+    <string name="data_is_null">数据都到火星上去啦\n   (づ｡◕‿‿◕｡)づ</string>
+
+    <!--登录内容-->
+
+    <string name="login_title">易阅读</string>
+    <string name="login_text">登录</string>
+    <string name="login_register">注册一个账号</string>
+    <string name="login_tourist">游客身份进入</string>
+
+    <!-- 注册内容-->
+    <string name="register_button">完成注册</string>
+    <string name="register_account">请输入您的昵称:</string>
+    <string name="register_password">请输入您的密码:</string>
+    <string name="register_email">请输入您常用的邮箱:</string>
+    <string name="register_ToLogin">返回登陆界面</string>
+
+    <!--侧拉栏-->
+    <string name="LeftMenu_finish">退出</string>
+    <string name="LeftList_comment">意见反馈</string>
+    <string name="LeftList_about">关于我们</string>
+    <string name="LeFtList_friends">我的好友</string>
+
+</resources>

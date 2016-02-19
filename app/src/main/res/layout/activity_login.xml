@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login">
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_above="@+id/login_button"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center_horizontal"
+            android:text="@string/login_title"
+            android:textColor="@color/login_title"
+            android:textSize="48dp" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/login_account_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:hint="ACCOUNT:"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/main"
+            android:textSize="14sp"
+            app:theme="@style/EditTheme" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:hint="PASSWORD:"
+            android:inputType="text"
+            android:password="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/main"
+            android:textSize="14sp"
+            app:theme="@style/EditTheme" />
+
+
+
+    </LinearLayout>
+    <Button
+        android:layout_above="@+id/login_bottom"
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="32dp"
+        android:background="#F1453D"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+    <RelativeLayout
+        android:id="@+id/login_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="18dp">
+
+        <TextView
+            android:id="@+id/login_ToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/divide"
+            android:text="@string/login_register"
+            android:textColor="@color/login_button"
+            android:textSize="20dp" />
+
+        <View
+
+            android:id="@+id/divide"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="15dp"
+            android:background="@color/login_view" />
+
+        <TextView
+            android:id="@+id/login_ToTourist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/divide"
+            android:text="@string/login_tourist"
+            android:textColor="@color/login_edittext_text"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

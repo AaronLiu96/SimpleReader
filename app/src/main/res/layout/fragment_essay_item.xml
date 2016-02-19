@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/find_lv_item"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="150dp">
+
+    <LinearLayout
+        android:id="@+id/essay_item_left"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/essay_item_img"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    <LinearLayout
+        android:id="@+id/essay_item_ll_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/essay_item_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor_bule"
+            android:text="刘振龙"
+            android:textSize="16sp"/>
+
+
+
+    </LinearLayout>
+      <TextView
+          android:layout_marginTop="10dp"
+          android:textSize="18sp"
+          android:id="@+id/essay_item_title"
+          android:text="暴走大事件"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+       <TextView
+           android:layout_marginTop="10dp"
+           android:text="2016-7-8"
+           android:id="@+id/essay_item_date"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="16sp"
+           android:textColor="@color/textColor_gray"/>
+</LinearLayout>
+
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/essay_item_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+
+</RelativeLayout>

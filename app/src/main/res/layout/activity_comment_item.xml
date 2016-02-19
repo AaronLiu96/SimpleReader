@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <ImageView
+            android:src="@mipmap/ic_man"
+            android:id="@+id/iv_header"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="16dp" />
+
+        <LinearLayout
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="liuzhenlong"
+                android:textColor="@color/main"
+                android:id="@+id/comment_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:gravity="top"/>
+
+            <TextView
+                android:text="2016-2-1"
+                android:id="@+id/comment_item_date"
+                android:layout_width="108dp"
+                android:layout_height="20dp"
+                android:gravity="bottom"
+                android:textColor="@color/light_gray"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:text="我也觉得"
+            android:textColor="@color/light_gray"
+            android:id="@+id/comment_item_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>

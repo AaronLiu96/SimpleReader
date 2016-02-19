@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/main">
+
+        <com.android.simplereader.ui.widget.RoundImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/headimage"
+            android:id="@+id/mine_headImg"
+            android:scaleType="fitCenter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/mine_name"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:text="Dragon"
+            android:layout_below="@+id/mine_headImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"/>
+
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/mine_listview"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>

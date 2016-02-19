@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_header"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_man" />
+
+        <LinearLayout
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/zero_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:gravity="top"
+                android:text="liuzhenlong"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/zero_tv_date"
+                android:layout_width="108dp"
+                android:layout_height="20dp"
+                android:gravity="bottom"
+                android:text="2016-2-1"
+                android:textColor="@color/light_gray"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/zero_tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="jintianzhenkaixin"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        >
+
+        <TextView
+            android:id="@+id/zero_tv_good_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+
+            android:text="点赞的有："
+            android:textColor="@color/light_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_toRightOf="@+id/zero_tv_good_btn"
+            android:id="@+id/zero_tv_good"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="2dp"
+            android:text="8"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/zero_tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="16dp"
+
+            android:text="评论-->"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

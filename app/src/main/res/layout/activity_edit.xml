@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+ <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+     <include layout="@layout/include_toolbar"></include>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:id="@+id/activity_edit_zero"
+        android:layout_height="match_parent"
+        android:textColor="@color/dark_gray"
+        android:hint="输入你想发表的内容~"
+        android:textSize="18sp"
+        android:textCursorDrawable="@mipmap/ic_cursor"
+        android:background="@null"
+        android:gravity="top"/>
+
+
+
+</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/zero_edit_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="32dp"
+        android:src="@mipmap/ic_complete"/>
+</android.support.design.widget.CoordinatorLayout>

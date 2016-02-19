@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/LeftMenu_Im"
+        android:orientation="vertical"
+        android:layout_margin="32dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+
+        <com.android.simplereader.ui.widget.RoundImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/headimage"/>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="25dp"
+            android:text="Dragon"
+            android:textColor="@color/LeftMenu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/LeftMenu_Name"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="32dp"
+        android:layout_above="@+id/LeftMenu_finish"
+        android:layout_below="@+id/LeftMenu_Im"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/LeftMenu_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="42dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="@string/LeftMenu_finish"
+        android:textColor="@color/LeftMenu_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LeftMenu_finish"/>
+</RelativeLayout>

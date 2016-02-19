@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="32dp"
+            android:background="@color/main" />
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:id="@+id/activity_mine_item_time"
+            android:layout_width="wrap_content"
+            android:textColor="@color/main"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="2016-2-17"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="32dp"
+            android:background="@color/main" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_alignLeft="@id/left"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="100dp">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/activity_mine_item_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我就是这么想的，怎么了"
+            android:textSize="16sp"
+            android:textColor="@color/textColor_bule"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/mine_tv_good_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+
+                android:text="点赞的有："
+                android:textColor="@color/light_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/mine_tv_good"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_toRightOf="@+id/mine_tv_good_btn"
+                android:text="8"
+                android:textColor="@color/light_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:id="@+id/mine_tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="16dp"
+
+                android:text="评论-->"
+                android:textColor="@color/light_gray"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

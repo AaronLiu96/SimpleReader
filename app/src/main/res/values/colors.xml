@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Base-->
+    <color name="main_">#F2BA95</color>
+    <color name="main">#E74B3B</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="halfTouming">#e0000000</color>
+    <color name="Touming">#00000000</color>
+    <color name="dark_gray">#404040</color>
+    <color name="light_gray">#9a9a9a</color>
+    <color name="primary_text">#222222</color>
+    <color name="secondary_text">#bbbbbb</color>
+    <color name="ed_text_color">#404040</color>
+
+    <color name="textColor_gray">#A9A9A9</color>
+    <color name="textColor_bule">#1E90FF</color>
+    <color name="bg_division">#A9A9A9</color>
+
+    <!--登录界面-->
+    <color name="login_title">#E74B3B</color>
+    <color name="login_edittext_text">#CECCD6</color>
+    <color name="login_button">#F1453D</color>
+    <color name="login_view">#F1F1F1</color>
+
+    <!-- 注册界面-->
+    <color name="register_et_textColor">#2B2B2B</color>
+    <color name="register_hint">#AAACAB</color>
+
+    <!--侧拉栏界面-->
+    <color name="LeftMenu_name">#949190</color>
+   
+    <!--故事界面-->
+    <color name="Storise_item_title">#222222</color>
+    <color name="Storise_item_date">#bbbbbb</color>
+
+    <!--文章界面-->
+    <color name="essay_null_textColor">#E74B3B</color>
+    <color name="essay_activity_button">#E74B3B</color>
+    <!-- dialog-->
+    <color name="dialog_nav">#9a9a9a</color>
+
+
+
+    <color name="color_1">#E74B3B</color>
+    <color name="color_2">#E74B3B</color>
+    <color name="color_3">#E74B3B</color>
+    <color name="color_4">#E74B3B</color>
+
+    <color name="swipe_background_color">#ffffff</color>
+</resources>
