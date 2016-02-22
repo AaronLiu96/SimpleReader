@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="32dp"
-        android:src="@mipmap/ic_edit_pen"/>
+        android:src="@mipmap/ic_edit_pen2"/>
 
 
 

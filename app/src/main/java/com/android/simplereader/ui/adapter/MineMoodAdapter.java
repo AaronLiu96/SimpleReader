@@ -1,11 +1,13 @@
 package com.android.simplereader.ui.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,16 +82,16 @@ public class MineMoodAdapter extends RecyclerView.Adapter<MineMoodAdapter.MyView
 
         TextView time_tv;
         TextView data_tv;
-        TextView mine_tv_good_btn;
+        ImageView mine_tv_good_btn;
         TextView mine_tv_good;
-        TextView mine_tv_comment;
+        ImageView mine_tv_comment;
         public MyViewHold(View itemView) {
             super(itemView);
             time_tv = (TextView) itemView.findViewById(R.id.activity_mine_item_time);
             data_tv = (TextView) itemView.findViewById(R.id.activity_mine_item_data);
             mine_tv_good = (TextView) itemView.findViewById(R.id.mine_tv_good);
-            mine_tv_comment = (TextView) itemView.findViewById(R.id.mine_tv_comment);
-            mine_tv_good_btn = (TextView) itemView.findViewById(R.id.mine_tv_good_btn);
+            mine_tv_comment = (ImageView) itemView.findViewById(R.id.mine_tv_comment);
+            mine_tv_good_btn = (ImageView) itemView.findViewById(R.id.mine_tv_good_btn);
 
         }
     }

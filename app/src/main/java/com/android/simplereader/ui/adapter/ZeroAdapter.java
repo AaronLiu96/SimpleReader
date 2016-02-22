@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,10 +48,10 @@ public class ZeroAdapter  extends ArrayAdapter<Zero> {
             viewHolder = new ViewHolder();
             viewHolder.ZeroContent_tv = (TextView) convertView.findViewById(R.id.zero_tv_content);
                     viewHolder.ZeroDate_tv = (TextView) convertView.findViewById(R.id.zero_tv_date);
-                    viewHolder.ZeroGood_btn = (TextView) convertView.findViewById(R.id.zero_tv_good_btn);
+                    viewHolder.ZeroGood_btn = (ImageView) convertView.findViewById(R.id.zero_tv_good_btn);
                     viewHolder.ZeroGood_tv = (TextView) convertView.findViewById(R.id.zero_tv_good);
                     viewHolder.ZeroName_tv = (TextView) convertView.findViewById(R.id.zero_tv_name);
-                    viewHolder.ZeroGood_comment = (TextView) convertView.findViewById(R.id.zero_tv_comment);
+                    viewHolder.ZeroGood_comment = (ImageView) convertView.findViewById(R.id.zero_tv_comment);
                     viewHolder.ZeroGood_comment.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -87,7 +88,7 @@ public class ZeroAdapter  extends ArrayAdapter<Zero> {
         TextView ZeroContent_tv;
         TextView ZeroDate_tv;
         TextView ZeroGood_tv;
-        TextView ZeroGood_btn;
-        TextView ZeroGood_comment;
+        ImageView ZeroGood_btn;
+        ImageView ZeroGood_comment;
     }
 }

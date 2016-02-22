@@ -37,6 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="32dp"
-        android:src="@mipmap/ic_essay_search"/>
+        android:src="@mipmap/ic_essay_search2"/>
 </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

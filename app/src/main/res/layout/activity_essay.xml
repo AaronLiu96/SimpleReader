@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="32dp"
-        android:src="@mipmap/ic_essay_collection"/>
+        android:src="@mipmap/ic_essay_collection2"/>
 
 
 

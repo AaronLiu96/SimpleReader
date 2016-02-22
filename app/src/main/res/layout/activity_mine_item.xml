@@ -54,32 +54,34 @@
             android:layout_marginTop="5dp"
             >
 
-            <TextView
+            <ImageView
                 android:id="@+id/mine_tv_good_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-
-                android:text="点赞的有："
+                android:src="@mipmap/ic_good"
                 android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/mine_tv_good"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_toRightOf="@+id/mine_tv_good_btn"
                 android:text="8"
-                android:textColor="@color/light_gray"
+
+                android:layout_centerVertical="true"
+                android:textColor="@color/main"
                 android:textSize="14sp" />
 
-            <TextView
+            <ImageView
                 android:layout_alignParentRight="true"
                 android:id="@+id/mine_tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginRight="16dp"
-
-                android:text="评论-->"
+                android:src="@mipmap/ic_comment"
                 android:textColor="@color/light_gray"
                 android:textSize="14sp" />
         </RelativeLayout>
