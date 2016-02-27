@@ -202,13 +202,13 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
     }
 
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-            scrollFlag = true;
-        } else {
-            scrollFlag = false;
-        }
+   public void onScrollStateChanged(AbsListView view, int scrollState) {
+    if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+        scrollFlag = true;
+    } else {
+        scrollFlag = false;
     }
+}
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {

@@ -33,5 +33,7 @@
     <string name="LeftList_comment">意见反馈</string>
     <string name="LeftList_about">关于我们</string>
     <string name="LeFtList_friends">我的好友</string>
+    <string name="from_galley">相册</string>
+    <string name="from_photo">相机</string>
 
 </resources>

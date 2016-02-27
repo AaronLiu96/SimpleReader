@@ -1,7 +1,12 @@
 package com.android.simplereader.ui.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,17 +17,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.android.simplereader.R;
 import com.android.simplereader.model.bean.LeftMenu;
+import com.android.simplereader.model.callback.MyPopupOnTouchListner;
 import com.android.simplereader.presenter.LeftFragmentPresent;
 import com.android.simplereader.ui.activity.AboutActivity;
 import com.android.simplereader.ui.adapter.LeftMenuAdapter;
 import com.android.simplereader.ui.view.ILeftMenuFragment;
+import com.android.simplereader.ui.widget.RoundImageView;
 import com.android.simplereader.util.ActivityCollectorUtils;
 import com.android.simplereader.util.DialogUtils;
+import com.android.simplereader.util.GetImageUtils;
+import com.android.simplereader.util.PicPopupWindowUtils;
 import com.android.simplereader.util.SPUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +51,13 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
     private TextView LeftMenu_finish;
     private LeftMenuAdapter leftMenuAdapter;
     private LeftFragmentPresent leftFragmentPresent;
+    private RoundImageView LeftMenu_userImage;
     private List<LeftMenu> dataList = new ArrayList<>();
-
+    private PopupWindow mPopupWindow;
+    private TextView gallery;
+    private TextView photo;
+    private Uri imageUri;
+    private String userName;
 
 
     @Nullable
@@ -53,19 +70,26 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
 
         if ((boolean) SPUtils.get(getActivity(), "is_login", false)) {
             LeftMenu_Name.setText((String) SPUtils.get(getActivity(), "name", ""));
+            userName = (String) SPUtils.get(getActivity(), "name", "");
         }else {
             LeftMenu_Name.setText("未登录");
         }
         LeftMenu_List.setAdapter(leftMenuAdapter);
         LeftMenu_List.setOnItemClickListener(this);
-
+        initUserInfo();
+        initPopupWindow();
 
         return view;
     }
 
     private void initView(View v){
-
-
+        LeftMenu_userImage = (RoundImageView) v.findViewById(R.id.LeftMenu_userImage);
+        LeftMenu_userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.showAsDropDown(v);
+            }
+        });
         LeftMenu_Name = (TextView) v.findViewById(R.id.LeftMenu_Name);
         LeftMenu_List = (ListView) v.findViewById(R.id.LeftMenu_List);
         LeftMenu_finish = (TextView) v.findViewById(R.id.LeftMenu_finish);
@@ -127,4 +151,56 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
 
         }
     }
+
+    private void initUserInfo() {
+        //获取uri地址
+        SharedPreferences sp = getActivity().getSharedPreferences("data" + userName, Context.MODE_APPEND);
+        imageUri = Uri.parse(sp.getString("image_uri", ""));
+        //将保存的头像显示出来
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 2;
+            Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver()
+                    .openInputStream(imageUri), null, options);
+
+            if (bitmap != null) {
+                LeftMenu_userImage.setImageBitmap(bitmap);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void initPopupWindow() {
+        mPopupWindow = PicPopupWindowUtils.getPopouWiondow(getActivity());
+        gallery = (TextView) mPopupWindow.getContentView().findViewById(R.id.tv_gallery);
+        gallery.setOnTouchListener(new MyPopupOnTouchListner());
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imageUri = GetImageUtils.getImageUri(userName+ "'s_image");
+                //保存uri
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("data" + userName, getActivity().MODE_PRIVATE).edit();
+                editor.putString("image_uri", imageUri.toString());
+                editor.apply();
+                GetImageUtils.chooseFromAlbum((android.app.Activity) v.getContext(), imageUri);
+            }
+        });
+        photo = (TextView) mPopupWindow.getContentView().findViewById(R.id.tv_photo);
+        photo.setOnTouchListener(new MyPopupOnTouchListner());
+        photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageUri = GetImageUtils.getImageUri(userName + "'s_image");
+                //保存uri
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("data" + userName, getActivity().MODE_PRIVATE).edit();
+                editor.putString("image_uri", imageUri.toString());
+                editor.apply();
+                GetImageUtils.takePhoto((android.app.Activity) v.getContext(), imageUri);
+            }
+        });
+    }
+
 }
