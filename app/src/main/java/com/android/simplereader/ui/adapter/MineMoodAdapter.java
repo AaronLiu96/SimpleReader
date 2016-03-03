@@ -54,7 +54,7 @@ public class MineMoodAdapter extends RecyclerView.Adapter<MineMoodAdapter.MyView
         Log.d("MineMoodApapter--->>","我开始执行了onBindViewHolder");
         holder.time_tv.setText(mineData.get(position).getZeroDate());
 
-        holder.data_tv.setText("I say:"+mineData.get(position).getZeroContent());
+        holder.data_tv.setText("我曾经说过·:"+mineData.get(position).getZeroContent());
         Log.d("MineMoodApapter--->>", mineData.get(position).getZeroContent());
         holder.mine_tv_comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class MineMoodAdapter extends RecyclerView.Adapter<MineMoodAdapter.MyView
         holder.mine_tv_good_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BmobUtil.UpdateGoodZero(mContext);
+              //  BmobUtil.UpdateGoodZero(mContext);
 
             }
         });

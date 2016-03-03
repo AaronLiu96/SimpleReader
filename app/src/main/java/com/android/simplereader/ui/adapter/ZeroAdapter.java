@@ -61,7 +61,7 @@ public class ZeroAdapter  extends ArrayAdapter<Zero> {
             viewHolder.ZeroGood_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BmobUtil.UpdateGoodZero(mContext);
+                    BmobUtil.UpdateGoodZero(mContext,ZeroObjectId);
 
                 }
             });

@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor_bule"
             android:text="刘振龙"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
 
 
     </LinearLayout>
       <TextView
           android:layout_marginTop="10dp"
-          android:textSize="18sp"
+          android:textSize="16sp"
           android:id="@+id/essay_item_title"
           android:text="暴走大事件"
           android:layout_width="match_parent"
@@ -47,7 +47,7 @@
            android:id="@+id/essay_item_date"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:textSize="16sp"
+           android:textSize="14sp"
            android:textColor="@color/textColor_gray"/>
 </LinearLayout>
 
@@ -55,8 +55,9 @@
         android:layout_alignParentRight="true"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/essay_item_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp" />

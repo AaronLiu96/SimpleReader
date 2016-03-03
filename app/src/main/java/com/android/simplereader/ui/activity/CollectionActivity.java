@@ -7,7 +7,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,14 +24,16 @@ import com.android.simplereader.util.ActivityCollectorUtils;
 import com.android.simplereader.util.SPUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
-public class CollectionActivity extends BaseActivity {
+public class CollectionActivity extends BaseActivity implements ActionMode.Callback {
 
     @Bind(R.id.collection_lv)
      ListView collection_lv;
@@ -38,6 +45,8 @@ public class CollectionActivity extends BaseActivity {
     private final int SUCCESS = 1;
     private List<Collection>  collectionList = new ArrayList<>();
     private CollectionAdapter collectionAdapter;
+    public Set<Integer> positionSet = new HashSet<>();
+    private ActionMode mActionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,23 @@ public class CollectionActivity extends BaseActivity {
         getDataFromBmob();
         collectionAdapter = new CollectionAdapter(CollectionActivity.this,R.layout.fragment_essay_item,collectionList);
         collection_lv.setAdapter(collectionAdapter);
+        collection_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EssayActivity.actionStart(CollectionActivity.this, collectionList.get(position).getCollectionContent(), collectionList.get(position).getUserName(),
+                        collectionList.get(position).getCollectionTitle(), collectionList.get(position).getCollectionTime(), collectionList.get(position).getCollectionPic());
+            }
+        });
+        collection_lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mActionMode == null) {
+                    mActionMode = startActionMode(CollectionActivity.this);
+                }
+                addOrRemove(position);
+                return true;
+            }
+        });
         initRefresh();
     }
     private void initRefresh(){
@@ -137,5 +163,57 @@ public class CollectionActivity extends BaseActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        if (mActionMode == null) {
+            mActionMode = mode;
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.menu_collection, menu);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete: // 删除已选
+                //删除操作
+                mode.finish(); // Action picked, so close the CAB
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        mActionMode = null;
+        positionSet.clear();
+        collectionAdapter.notifyDataSetChanged();
+    }
+
+    private void addOrRemove(int position) {
+        if (positionSet.contains(position)) { // 如果包含，则撤销选择
+            positionSet.remove(position);
+        } else { // 如果不包含，则添加
+            positionSet.add(position);
+        }
+        if (positionSet.size() == 0) { // 如果没有选中任何的item，则退出多选模式
+            mActionMode.finish();
+        } else {
+            // 设置ActionMode标题
+            mActionMode.setTitle(positionSet.size() + " 已选择");
+            // 更新列表界面，否则无法显示已选的item
+            collectionAdapter.notifyDataSetChanged();
+        }
     }
 }

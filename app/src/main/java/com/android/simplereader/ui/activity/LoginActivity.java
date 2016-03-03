@@ -68,6 +68,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
                         ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                         startActivity(ToMainActivity);
+                        LoginActivity.this.finish();
                     }
 
                     @Override
@@ -96,6 +97,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
                 ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(ToMainActivity);
+                this.finish();
                 break;
         }
     }
@@ -111,4 +113,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onDestroy();
         ActivityCollectorUtils.removeActivity(this);
     }
+
+
+
 }

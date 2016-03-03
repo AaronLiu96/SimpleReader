@@ -43,6 +43,11 @@ public class OkHttpUtil {
         }).start();
     }
 
+    /**
+     * 带有网络请求头的网络请求
+     * @param address
+     * @param listener
+     */
     public static void sendOKHttpRequestByHeader(final String address,final HttpCallbackListener listener){
         final OkHttpClient client  = new OkHttpClient();
         new Thread(new Runnable() {

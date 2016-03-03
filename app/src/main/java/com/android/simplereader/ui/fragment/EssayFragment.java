@@ -18,9 +18,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.android.simplereader.R;
 import com.android.simplereader.config.Constants;
@@ -59,6 +62,7 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
     private final int SHOW_RESPONSE = 2;
     private int numbersInOnePage = 0;
     private Object messageHttp;
+    private int lastVisibleItemPosition;
 
     @Nullable
     @Override
@@ -222,6 +226,23 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
                     }
                 }
             }
+        }
+
+        if (scrollFlag) {
+            if (firstVisibleItem > lastVisibleItemPosition) {
+                //上滑
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) search.getLayoutParams();
+                int fabBottomMargin = lp.bottomMargin;
+                search.animate().translationY(search.getHeight()+fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
+            }
+            if (firstVisibleItem < lastVisibleItemPosition) {
+                //下滑
+                search.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+            }
+            if (firstVisibleItem == lastVisibleItemPosition) {
+                return;
+            }
+            lastVisibleItemPosition = firstVisibleItem;
         }
     }
 }

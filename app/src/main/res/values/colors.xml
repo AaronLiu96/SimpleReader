@@ -14,6 +14,7 @@
     <color name="primary_text">#222222</color>
     <color name="secondary_text">#bbbbbb</color>
     <color name="ed_text_color">#404040</color>
+    <color name="backgroung_color">#ececec</color>
 
     <color name="textColor_gray">#A9A9A9</color>
     <color name="textColor_bule">#1E90FF</color>

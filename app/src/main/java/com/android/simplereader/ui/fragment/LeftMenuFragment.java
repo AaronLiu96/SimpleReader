@@ -25,6 +25,7 @@ import com.android.simplereader.model.bean.LeftMenu;
 import com.android.simplereader.model.callback.MyPopupOnTouchListner;
 import com.android.simplereader.presenter.LeftFragmentPresent;
 import com.android.simplereader.ui.activity.AboutActivity;
+import com.android.simplereader.ui.activity.LoginActivity;
 import com.android.simplereader.ui.adapter.LeftMenuAdapter;
 import com.android.simplereader.ui.view.ILeftMenuFragment;
 import com.android.simplereader.ui.widget.RoundImageView;
@@ -143,6 +144,10 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
                         startActivity(ToAbout);
                         break;
                     case 2:
+                        Intent ToLogin = new Intent(getActivity(), LoginActivity.class);
+                        ToLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                        startActivity(ToLogin);
+                        getActivity().finish();
                         break;
                     default:
                         break;

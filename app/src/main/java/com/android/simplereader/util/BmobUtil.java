@@ -70,10 +70,10 @@ public class BmobUtil {
     /**
      * 点赞的时候数字增加1
      */
-    public static void UpdateGoodZero(final Context context) {
+    public static void UpdateGoodZero(final Context context,String itemId) {
         Zero zero = new Zero();
         zero.increment("ZeroGood");
-        zero.update(context, new UpdateListener() {
+        zero.update(context,itemId, new UpdateListener() {
             @Override
             public void onSuccess() {
                 Toast.makeText(context, "谢谢你为作者点赞~", Toast.LENGTH_SHORT).show();

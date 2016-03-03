@@ -24,7 +24,7 @@ public class MineAdapter extends ArrayAdapter<MineList> {
         super(context, resource, objects);
         resourceId =resource;
     }
-
+/**
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MineList mineList =getItem(position);
@@ -45,6 +45,7 @@ public class MineAdapter extends ArrayAdapter<MineList> {
         return convertView;
 
     }
+    **/
 
     private class ViewHolder{
         TextView tv_mine_title;
