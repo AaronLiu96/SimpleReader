@@ -1,8 +1,12 @@
 package com.android.simplereader.ui.fragment;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,14 +19,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.simplereader.R;
 import com.android.simplereader.model.bean.Zero;
 import com.android.simplereader.ui.activity.EditActivity;
 import com.android.simplereader.ui.adapter.ZeroAdapter;
+import com.android.simplereader.ui.widget.RoundImageView;
+import com.android.simplereader.util.AutoHideUtil;
 import com.android.simplereader.util.BmobUtil;
 import com.android.simplereader.util.DialogUtils;
 import com.android.simplereader.util.SPUtils;
@@ -40,17 +51,22 @@ import cn.bmob.v3.listener.FindListener;
 public class ZeroFragment extends Fragment {
 
     private ListView zero_listview;
+    private TextView zero_header_name;
+    private RoundImageView zero_header_image;
+    private View zero_header;
     private SwipeRefreshLayout swipeRefreshLayout;
     private FloatingActionButton zero_edit;
     private AppCompatActivity mAppCompatActivity;
     private Activity mActivity;
-    private Toolbar toolbar;
+ //   private Toolbar toolbar;
 
     private List<Zero> zeroList = new ArrayList<>();
     private int numberOfLoad =50;
     private ZeroAdapter zeroAdapter;
     private final int SUCCESS = 1;
     private final int SHOW_RESPONSE = 2;
+    private int touchSlop = 10;
+
 
     private String TAG = "ZeroNoDataProblem--->>";
 
@@ -59,27 +75,36 @@ public class ZeroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
         View view = inflater.inflate(R.layout.fragment_zero,container,false);
+        touchSlop = (int) (ViewConfiguration.get(getActivity()).getScaledTouchSlop() * 0.9);
+
         initView(view);
         getDataFromBmob(view);
         zeroAdapter = new ZeroAdapter(getActivity(),R.layout.fragment_zero_item,zeroList);
         zero_listview.setAdapter(zeroAdapter);
+
+        zero_listview.setDividerHeight(10);
+        AutoHideUtil.applyListViewAutoHide(getActivity(),zero_listview,zero_header,null,0);
         initRefresh(view);
         return view;
     }
 
     private void initView(View v){
         AppCompatActivity mAppCompatActivity = (AppCompatActivity) mActivity;
-        toolbar = (Toolbar) v.findViewById(R.id.zero_layout);
-        mAppCompatActivity.setSupportActionBar(toolbar);
+   //     toolbar = (Toolbar) v.findViewById(R.id.zero_layout);
+    //    mAppCompatActivity.setSupportActionBar(toolbar);
         ActionBar actionBar = mAppCompatActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        toolbar.setTitle("易友空间~");
-        toolbar.setLogo(R.mipmap.ic_logo);
-        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));
+    //    toolbar.setTitle("易友空间~");
+     //   toolbar.setLogo(R.mipmap.ic_logo);
+     //   toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));
+        zero_header =  v.findViewById(R.id.zero_header);
         swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.zero_refresh);
+        zero_header_image = (RoundImageView) v.findViewById(R.id.zero_header_headImg);
+        zero_header_name= (TextView) v.findViewById(R.id.zero_header_name);
+        zero_header_name.setText((String)SPUtils.get(getActivity(),"name",""));
         zero_listview = (ListView) v.findViewById(R.id.zero_listview);
         zero_edit = (FloatingActionButton) v.findViewById(R.id.zero_edit);
         zero_edit.setOnClickListener(new View.OnClickListener() {
@@ -183,4 +208,12 @@ public class ZeroFragment extends Fragment {
         }
 
     };
+
+
+
+
+
+
+
+
 }

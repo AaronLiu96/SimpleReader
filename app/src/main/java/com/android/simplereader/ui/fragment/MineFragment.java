@@ -92,11 +92,11 @@ public class MineFragment extends Fragment implements AdapterView.OnItemClickLis
                 ToCollectionActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(ToCollectionActivity);
                 break;
-            case 2:
+            case 3:
                 DialogUtils.UpdatePasswordDialog(getActivity(),view);
 
                 break;
-            case 3:
+            case 2:
                 Intent ToMineActivity =new Intent(getActivity(), MineActivity.class);
                 ToMineActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(ToMineActivity);
