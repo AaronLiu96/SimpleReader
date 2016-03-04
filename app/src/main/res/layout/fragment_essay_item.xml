@@ -3,7 +3,7 @@
     android:id="@+id/find_lv_item"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:layout_height="150dp">
+    android:layout_height="125dp">
 
     <LinearLayout
         android:id="@+id/essay_item_left"
@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_toLeftOf="@+id/essay_item_img"
+        android:layout_toLeftOf="@+id/zero_item_right_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -35,14 +35,14 @@
 
     </LinearLayout>
       <TextView
-          android:layout_marginTop="10dp"
+          android:layout_marginTop="5dp"
           android:textSize="16sp"
           android:id="@+id/essay_item_title"
           android:text="暴走大事件"
           android:layout_width="match_parent"
           android:layout_height="wrap_content" />
        <TextView
-           android:layout_marginTop="10dp"
+           android:layout_marginTop="5dp"
            android:text="2016-7-8"
            android:id="@+id/essay_item_date"
            android:layout_width="wrap_content"
@@ -50,16 +50,22 @@
            android:textSize="14sp"
            android:textColor="@color/textColor_gray"/>
 </LinearLayout>
-
-    <ImageView
-        android:layout_alignParentRight="true"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/essay_item_img"
+    <LinearLayout
+        android:id="@+id/zero_item_right_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:scaleType="fitCenter"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" />
-
+        android:layout_marginBottom="20dp">
+    <ImageView
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/essay_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+         />
+    </LinearLayout>
 </RelativeLayout>

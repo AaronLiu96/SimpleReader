@@ -75,6 +75,7 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
         essay_listview.setAdapter(adapter);
         essay_listview.setOnScrollListener(this);
         essay_listview.setOnItemClickListener(this);
+        essay_listview.setDividerHeight(10);
         initRefresh();
         return view;
     }

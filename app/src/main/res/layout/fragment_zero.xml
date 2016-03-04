@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroung_color"
     android:orientation="vertical">
 
@@ -54,7 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="32dp"
-            android:src="@mipmap/ic_edit_pen2" />
+            android:src="@mipmap/ic_edit_pen2"
+            app:backgroundTint="@color/main"/>
 
 
     </android.support.design.widget.CoordinatorLayout>
