@@ -1,6 +1,8 @@
 package com.android.simplereader.util;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,20 +24,20 @@ public class GetImageUtils {
     public static Uri imageUri;
     private static final String TAG = "GetImageUtil";
 
-    public static void takePhoto(Activity activity, Uri uri) {
+    public static void takePhoto(Fragment fragment, Uri uri) {
         imageUri = uri;
         Log.d(TAG, "takePhoto() + 拍照，uri:" + imageUri);
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        activity.startActivityForResult(intent, TAKE_PHOTO);
+        fragment.startActivityForResult(intent, TAKE_PHOTO);
     }
 
-    public static void chooseFromAlbum(Activity activity, Uri uri) {
+    public static void chooseFromAlbum(Fragment fragment, Uri uri) {
         imageUri = uri;
         Log.d(TAG, "chooseFromAlbum() + 从相册选择图片，uri:" + imageUri);
         Intent intent = new Intent("android.intent.action.OPEN_DOCUMENT");
         intent.setType("image/*");
-        activity.startActivityForResult(intent, TAKE_PHOTO);
+        fragment.startActivityForResult(intent, TAKE_PHOTO);
     }
 
     public static Uri getImageUri(String fileName) {
@@ -54,7 +56,7 @@ public class GetImageUtils {
         return imageUri;
     }
 
-    public static void cropPhoto(Activity activity, int requestCode, int resultCode,
+    public static void cropPhoto(Fragment fragment, int requestCode, int resultCode,
                                  ImageView imageView, Uri uri, Intent data) {
         switch (requestCode) {
             case TAKE_PHOTO:
@@ -70,7 +72,7 @@ public class GetImageUtils {
                     intent.putExtra("aspectX", 1);
                     intent.putExtra("aspectY", 1);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                    activity.startActivityForResult(intent, CROP_PHOTO);
+                    fragment.startActivityForResult(intent, CROP_PHOTO);
                 }
                 break;
             case CROP_PHOTO:
@@ -78,7 +80,7 @@ public class GetImageUtils {
                     try {
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         options.inSampleSize = 2;
-                        Bitmap bitmap = BitmapFactory.decodeStream(activity.getContentResolver()
+                        Bitmap bitmap = BitmapFactory.decodeStream(fragment.getActivity().getContentResolver()
                                 .openInputStream(uri), null, options);
                         if (bitmap != null) {
                             Log.d(TAG, "cropPhoto() + 我觉得这一步根本就没运行！");

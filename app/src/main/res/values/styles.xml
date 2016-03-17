@@ -12,4 +12,13 @@
         <item name="colorAccent">@color/main</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
+
+    <style name="MyActionBarTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/AppTheme</item>
+        <item name="android:actionModeCloseDrawable">@mipmap/ic_logo</item>
+        <item name="android:actionModeBackground">@color/main</item>
+        <!-- ActionMode右边的按钮是一个特殊的CloseButton，分割线与CloseButton的Style有关 -->
+        <!-- 删除ActionMode的Divider-->
+        <item name="android:actionModeCloseButtonStyle">@null</item>
+    </style>
 </resources>

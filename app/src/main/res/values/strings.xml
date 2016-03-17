@@ -23,9 +23,9 @@
 
     <!-- 注册内容-->
     <string name="register_button">完成注册</string>
-    <string name="register_account">请输入您的昵称:</string>
-    <string name="register_password">请输入您的密码:</string>
-    <string name="register_email">请输入您常用的邮箱:</string>
+    <string name="register_account">账户:</string>
+    <string name="register_password">密码:</string>
+    <string name="register_email">邮箱:</string>
     <string name="register_ToLogin">返回登陆界面</string>
 
     <!--侧拉栏-->

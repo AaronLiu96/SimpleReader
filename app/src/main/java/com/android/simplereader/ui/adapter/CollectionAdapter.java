@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.android.simplereader.R;
 import com.android.simplereader.model.bean.Collection;
+import com.android.simplereader.ui.activity.CollectionActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Dragon丶Lz on 2016/2/15.
@@ -48,6 +50,13 @@ public class CollectionAdapter extends ArrayAdapter<Collection> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        Set<Integer> positionSet = CollectionActivity.collectionActivirt_instance.positionSet;
+        if (positionSet.contains(position)) {
+            convertView.setBackground(getContext().getResources().getDrawable(R.drawable.bg_selected));
+        } else {
+            convertView.setBackground(getContext().getResources().getDrawable(R.drawable.btn_common));
+        }
+
         viewHolder.title_tv.setText(title);
         viewHolder.date_tv.setText(date);
         viewHolder.userName_tv.setText(name);

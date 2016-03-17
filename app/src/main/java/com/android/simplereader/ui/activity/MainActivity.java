@@ -100,18 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
     }
     private void initView(){
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            /***
-             *当我们打开菜单的时候，
-             * 先执行onDrawerStateChanged，
-             * 然后不断执行onDrawerSlide，第三步会执行onDrawerOpened，
-             * 最后执行onDrawerStateChanged
-             *------------------------------------------------------------
-             * 当我们关闭菜单的时候，
-             * 先执行onDrawerStateChanged，
-             * 然后不断执行onDrawerSlide，
-             * 第三步会执行onDrawerClosed，
-             * 最后执行onDrawerStateChanged
-             */
+
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 slideAnim(drawerView, slideOffset);
@@ -146,6 +135,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
         hideFragments(transaction);
         switch (index) {
             case 0:
+
+                find_image.setImageResource(R.mipmap.ic_stories_select);
                 find_text.setTextColor(MainActivity.this.getResources().getColor(R.color.main));
                 if (findFragment == null) {
                         findFragment = new StoriesFragment();
@@ -156,6 +147,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
                     break;
             case 1:
 
+                attention_image.setImageResource(R.mipmap.ic_menu_home_select);
                         attention_text.setTextColor(MainActivity.this.getResources().getColor(R.color.main));
                         if (attentionFragment == null) {
                             attentionFragment = new EssayFragment();
@@ -167,6 +159,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
             case 2:
                     if ((boolean) SPUtils.get(MainActivity.this, "is_login", false)){
                         friend_text.setTextColor(MainActivity.this.getResources().getColor(R.color.main));
+                        friend_image.setImageResource(R.mipmap.ic_menu_allfriends_select);
                         if (friendFragment == null) {
                             friendFragment = new ZeroFragment();
                             transaction.add(R.id.content, friendFragment);
@@ -205,6 +198,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
                         break;
             case 3:
                 if ((boolean) SPUtils.get(MainActivity.this, "is_login", false)) {
+                    mine_image.setImageResource(R.mipmap.ic_menu_friendslist_select);
+
                     mine_text.setTextColor(MainActivity.this.getResources().getColor(R.color.main));
                     if (mineFragment == null) {
                         mineFragment = new MineFragment();
@@ -250,12 +245,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
 
     private void clearSelection() {
         find_text.setTextColor(Color.parseColor("#82858b"));
-
+        attention_image.setImageResource(R.mipmap.ic_menu_home);
         friend_text.setTextColor(Color.parseColor("#82858b"));
-
+        find_image.setImageResource(R.mipmap.ic_stories);
         attention_text.setTextColor(Color.parseColor("#82858b"));
-
+        friend_image.setImageResource(R.mipmap.ic_menu_allfriends);
         mine_text.setTextColor(Color.parseColor("#82858b"));
+        mine_image.setImageResource(R.mipmap.ic_menu_friendslist);
     }
     private void hideFragments(FragmentTransaction transaction) {
         if (findFragment != null) {
@@ -274,7 +270,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
     }
 
     //滑动动画
-    private void slideAnim(View drawerView, float slideOffset) {
+    private void slideAnim(View drawerView, float slideOffset){
         View contentView = drawerLayout.getChildAt(0);
         // slideOffset表示菜单项滑出来的比例，打开菜单时取值为0->1,关闭菜单时取值为1->0
         float scale = 1 - slideOffset;
@@ -297,5 +293,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollectorUtils.removeActivity(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+
+        }
     }
 }

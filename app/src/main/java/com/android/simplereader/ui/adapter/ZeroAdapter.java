@@ -42,7 +42,7 @@ public class ZeroAdapter  extends ArrayAdapter<Zero> {
         Integer ZeroGood = zero.getZeroGood();
 
         final String ZeroObjectId = zero.getObjectId();
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(resourceId,null);
             viewHolder = new ViewHolder();
@@ -62,6 +62,7 @@ public class ZeroAdapter  extends ArrayAdapter<Zero> {
                 @Override
                 public void onClick(View v) {
                     BmobUtil.UpdateGoodZero(mContext,ZeroObjectId);
+                    viewHolder.ZeroGood_tv.setText(viewHolder.ZeroGood_tv.getText()+"+1");
 
                 }
             });

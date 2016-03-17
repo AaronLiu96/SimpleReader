@@ -6,7 +6,12 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -66,6 +71,7 @@ public class ZeroFragment extends Fragment {
     private final int SUCCESS = 1;
     private final int SHOW_RESPONSE = 2;
     private int touchSlop = 10;
+    private Uri imageUri;
 
 
     private String TAG = "ZeroNoDataProblem--->>";
@@ -78,6 +84,7 @@ public class ZeroFragment extends Fragment {
         touchSlop = (int) (ViewConfiguration.get(getActivity()).getScaledTouchSlop() * 0.9);
 
         initView(view);
+        initUserInfo();
         getDataFromBmob(view);
         zeroAdapter = new ZeroAdapter(getActivity(),R.layout.fragment_zero_item,zeroList);
         zero_listview.setAdapter(zeroAdapter);
@@ -97,12 +104,11 @@ public class ZeroFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-    //    toolbar.setTitle("易友空间~");
-     //   toolbar.setLogo(R.mipmap.ic_logo);
-     //   toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));
+
         zero_header =  v.findViewById(R.id.zero_header);
         swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.zero_refresh);
         zero_header_image = (RoundImageView) v.findViewById(R.id.zero_header_headImg);
+
         zero_header_name= (TextView) v.findViewById(R.id.zero_header_name);
         zero_header_name.setText((String)SPUtils.get(getActivity(),"name",""));
         zero_listview = (ListView) v.findViewById(R.id.zero_listview);
@@ -212,7 +218,25 @@ public class ZeroFragment extends Fragment {
 
 
 
+    private void initUserInfo() {
+        //获取uri地址
+        SharedPreferences sp = getActivity().getSharedPreferences("data" + (String) SPUtils.get(getActivity(), "name", ""), Context.MODE_APPEND);
+        imageUri = Uri.parse(sp.getString("image_uri", ""));
+        //将保存的头像显示出来
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 2;
+            Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver()
+                    .openInputStream(imageUri), null, options);
 
+            if (bitmap != null) {
+                zero_header_image.setImageBitmap(bitmap);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 

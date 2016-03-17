@@ -91,6 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Intent ToRegister = new Intent(LoginActivity.this,RegisterActivity.class);
                 ToRegister.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(ToRegister);
+                this.finish();
                 break;
             case R.id.login_ToTourist:
                 SPUtils.put(LoginActivity.this, "is_login", false);

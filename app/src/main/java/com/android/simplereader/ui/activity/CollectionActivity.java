@@ -21,6 +21,7 @@ import com.android.simplereader.app.BaseActivity;
 import com.android.simplereader.model.bean.Collection;
 import com.android.simplereader.ui.adapter.CollectionAdapter;
 import com.android.simplereader.util.ActivityCollectorUtils;
+import com.android.simplereader.util.BmobUtil;
 import com.android.simplereader.util.SPUtils;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
     private CollectionAdapter collectionAdapter;
     public Set<Integer> positionSet = new HashSet<>();
     private ActionMode mActionMode;
+    public static CollectionActivity collectionActivirt_instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
         setContentView(R.layout.activity_collection);
         ButterKnife.bind(this);
         ActivityCollectorUtils.addActivity(this);
+        collectionActivirt_instance =this;
+        setSupportActionBar(toolbar);
         toolbar.setTitle("我的收藏");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.setLogo(R.mipmap.ic_logo);
@@ -63,8 +67,15 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
         collection_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                EssayActivity.actionStart(CollectionActivity.this, collectionList.get(position).getCollectionContent(), collectionList.get(position).getUserName(),
-                        collectionList.get(position).getCollectionTitle(), collectionList.get(position).getCollectionTime(), collectionList.get(position).getCollectionPic());
+                if (mActionMode != null) { // 如果当前处于多选状态，则进入多选状态的逻辑
+                    // 维护当前已选的position
+                    addOrRemove(position);
+                } else { // 如果不是多选状态，则进入点击事件的业务逻辑
+                    EssayActivity.actionStart(CollectionActivity.this, collectionList.get(position).getCollectionContent(), collectionList.get(position).getUserName(),
+                            collectionList.get(position).getCollectionTitle(), collectionList.get(position).getCollectionTime(), collectionList.get(position).getCollectionPic());
+                }
+
+
             }
         });
         collection_lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -149,6 +160,7 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
                 for (int i = 0; i < list.size(); i++) {
                     collectionList.add(list.get(i));
                     collectionAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -167,6 +179,7 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        toolbar.setVisibility(View.GONE);
         if (mActionMode == null) {
             mActionMode = mode;
             MenuInflater inflater = mode.getMenuInflater();
@@ -187,7 +200,14 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
         switch (item.getItemId()) {
             case R.id.menu_delete: // 删除已选
                 //删除操作
-                mode.finish(); // Action picked, so close the CAB
+                for (int i=0;i<positionSet.size();i++){
+                    BmobUtil.DeleteCollectionItem(CollectionActivity.this,collectionList.get(i).getObjectId());
+                }
+                collectionList.clear();
+                getDataFromBmob();
+                collection_lv.setSelection(0);
+                collectionAdapter.notifyDataSetChanged();
+                mode.finish();
                 return true;
             default:
                 return false;
@@ -196,9 +216,12 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
+
         mActionMode = null;
+        toolbar.setVisibility(View.VISIBLE);
         positionSet.clear();
         collectionAdapter.notifyDataSetChanged();
+
     }
 
     private void addOrRemove(int position) {
@@ -211,7 +234,7 @@ public class CollectionActivity extends BaseActivity implements ActionMode.Callb
             mActionMode.finish();
         } else {
             // 设置ActionMode标题
-            mActionMode.setTitle(positionSet.size() + " 已选择");
+            mActionMode.setTitle("已选择"+positionSet.size() +"项");
             // 更新列表界面，否则无法显示已选的item
             collectionAdapter.notifyDataSetChanged();
         }

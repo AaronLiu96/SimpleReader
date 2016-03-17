@@ -163,4 +163,29 @@ public class DialogUtils {
 
 
     }
+
+    public static void ShowEmailDialog(Context context,String email){
+        new MaterialDialog.Builder(context)
+                .title("您当前的邮箱")
+                .content(email)
+                .positiveText("我知道了")
+
+                .titleColor(context.getResources().getColor(R.color.main))
+                .backgroundColor(context.getResources().getColor(R.color.white))
+                .positiveColor(context.getResources().getColor(R.color.main))
+                .cancelable(false)
+                .theme(Theme.LIGHT)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 }

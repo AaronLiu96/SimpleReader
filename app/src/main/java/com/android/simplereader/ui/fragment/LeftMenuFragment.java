@@ -115,7 +115,7 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
     public void refreshData(List<LeftMenu> dataList) {
         Log.d("LeftListProblem-->>","我已经执行了refreshData");
         leftMenuAdapter = new LeftMenuAdapter(getActivity(),R.layout.fragment_leftmenu_item,dataList);
-        Log.d("LeftListProblem-->>",dataList.get(0).getName());
+        Log.d("LeftListProblem-->>", dataList.get(0).getName());
         LeftMenu_List.setAdapter(leftMenuAdapter);
         Log.d("LeftListProblem-->>", "已经执行了setAdapter");
     }
@@ -190,7 +190,7 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("data" + userName, getActivity().MODE_PRIVATE).edit();
                 editor.putString("image_uri", imageUri.toString());
                 editor.apply();
-                GetImageUtils.chooseFromAlbum((android.app.Activity) v.getContext(), imageUri);
+                GetImageUtils.chooseFromAlbum(LeftMenuFragment.this, imageUri);
             }
         });
         photo = (TextView) mPopupWindow.getContentView().findViewById(R.id.tv_photo);
@@ -203,9 +203,19 @@ public class LeftMenuFragment extends Fragment implements ILeftMenuFragment,Adap
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("data" + userName, getActivity().MODE_PRIVATE).edit();
                 editor.putString("image_uri", imageUri.toString());
                 editor.apply();
-                GetImageUtils.takePhoto((android.app.Activity) v.getContext(), imageUri);
+                GetImageUtils.takePhoto(LeftMenuFragment.this, imageUri);
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("HeraImageProblem-->>", "我执行了onActivityResult");
+        Log.d("HeraImageProblem-->>",requestCode+"");
+        Log.d("HeraImageProblem-->>",resultCode+"");
+        if (requestCode == 1 || requestCode == 2) {
+            GetImageUtils.cropPhoto(this, requestCode, resultCode, LeftMenu_userImage, imageUri, data);
+        }
+    }
 }

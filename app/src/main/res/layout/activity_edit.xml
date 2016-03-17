@@ -36,6 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:backgroundTint="@color/main"
-        android:layout_margin="32dp"
+        android:layout_margin="16dp"
         android:src="@mipmap/ic_complete"/>
 </android.support.design.widget.CoordinatorLayout>

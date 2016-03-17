@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Base-->
+    <color name="btn_common_press">#d7d7d7</color>
     <color name="main_">#F2BA95</color>
     <color name="main">#E74B3B</color>
     <color name="colorPrimary">#3F51B5</color>

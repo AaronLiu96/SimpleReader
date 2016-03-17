@@ -187,15 +187,15 @@ public class StoriesFragment extends Fragment implements AbsListView.OnScrollLis
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount) {
-                    if (messageHttp != null) {
-                        if (totalItemCount != (page - 1) * numbersInOnePage) {
-                            if (totalItemCount < numbersInOnePage * page) {
-                                response(messageHttp, totalItemCount - (page - 1) * numbersInOnePage);
-                            } else {
-                                httpRequset(++page);
-                            }
+                if (messageHttp != null) {
+                    if (totalItemCount != (page - 1) * numbersInOnePage) {
+                        if (totalItemCount < numbersInOnePage * page) {
+                            response(messageHttp, totalItemCount - (page - 1) * numbersInOnePage);
+                        } else {
+                            httpRequset(++page);
                         }
-            }
+                    }
+                }
         }
         if (scrollFlag) {
             if (firstVisibleItem > lastVisibleItemPosition) {

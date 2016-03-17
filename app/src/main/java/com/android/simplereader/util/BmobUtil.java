@@ -21,6 +21,7 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -73,7 +74,7 @@ public class BmobUtil {
     public static void UpdateGoodZero(final Context context,String itemId) {
         Zero zero = new Zero();
         zero.increment("ZeroGood");
-        zero.update(context,itemId, new UpdateListener() {
+        zero.update(context, itemId, new UpdateListener() {
             @Override
             public void onSuccess() {
                 Toast.makeText(context, "谢谢你为作者点赞~", Toast.LENGTH_SHORT).show();
@@ -179,7 +180,7 @@ public class BmobUtil {
 
                     @Override
                     public void onFailure(int i, String s) {
-                        Snackbar.make(view, "修改失败"+s, Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "修改失败" + s, Snackbar.LENGTH_LONG)
                                 .setAction("确定", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -249,6 +250,45 @@ public class BmobUtil {
     }
 
 
+    /***
+     * 删除操作
+     */
+    public static void DeleteCollectionItem(Context context,String objectId){
+        Collection collection = new Collection();
+        collection.setObjectId(objectId);
+        collection.delete(context, new DeleteListener() {
 
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+
+            }
+        });
+    }
+
+    /***
+     * 查询当前用户的邮箱
+     */
+    public static void QueryEmail(final Context context){
+        BmobQuery<BmobUser> query = new BmobQuery<BmobUser>();
+
+        query.addWhereEqualTo("username", (String)SPUtils.get(context,"name",""));
+        query.findObjects(context, new FindListener<BmobUser>() {
+            @Override
+            public void onSuccess(List<BmobUser> object) {
+                // TODO Auto-generated method stub
+                DialogUtils.ShowEmailDialog(context, object.get(0).getEmail());
+            }
+            @Override
+            public void onError(int code, String msg) {
+                // TODO Auto-generated method stub
+               Toast.makeText(context,"出错了:"+msg,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
 
