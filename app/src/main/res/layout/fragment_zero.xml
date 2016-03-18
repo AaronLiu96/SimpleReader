@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -32,22 +32,17 @@
         android:layout_height="match_parent">
 
 
-        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/zero_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <ListView
-                android:paddingTop="200dp"
+
+            <android.support.v7.widget.RecyclerView
+
                 android:clipToPadding="false"
-                android:id="@+id/zero_listview"
+                android:id="@+id/zero_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:headerDividersEnabled="false">
 
-            </ListView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+            </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/zero_edit"
@@ -61,32 +56,5 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <RelativeLayout
-        android:id="@+id/zero_header"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@mipmap/zero_background_header">
 
-        <com.android.simplereader.ui.widget.RoundImageView
-            android:id="@+id/zero_header_headImg"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/headimage" />
-
-        <TextView
-            android:id="@+id/zero_header_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="35dp"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/zero_header_headImg"
-            android:text="Dragon"
-            android:textColor="@color/white"
-            android:textSize="25dp" />
-    </RelativeLayout>
-</FrameLayout>
+</LinearLayout>

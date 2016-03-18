@@ -21,6 +21,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,11 +57,11 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class ZeroFragment extends Fragment {
 
-    private ListView zero_listview;
+    private RecyclerView zero_recycleview;
     private TextView zero_header_name;
     private RoundImageView zero_header_image;
     private View zero_header;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
     private FloatingActionButton zero_edit;
     private AppCompatActivity mAppCompatActivity;
     private Activity mActivity;
@@ -70,7 +72,6 @@ public class ZeroFragment extends Fragment {
     private ZeroAdapter zeroAdapter;
     private final int SUCCESS = 1;
     private final int SHOW_RESPONSE = 2;
-    private int touchSlop = 10;
     private Uri imageUri;
 
 
@@ -81,17 +82,15 @@ public class ZeroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
         View view = inflater.inflate(R.layout.fragment_zero,container,false);
-        touchSlop = (int) (ViewConfiguration.get(getActivity()).getScaledTouchSlop() * 0.9);
 
         initView(view);
         initUserInfo();
         getDataFromBmob(view);
-        zeroAdapter = new ZeroAdapter(getActivity(),R.layout.fragment_zero_item,zeroList);
-        zero_listview.setAdapter(zeroAdapter);
+       // zeroAdapter = new ZeroAdapter(getActivity(),R.layout.fragment_zero_item,zeroList);
+       // zero_recycleview.setAdapter(zeroAdapter);
 
-        zero_listview.setDividerHeight(10);
-        AutoHideUtil.applyListViewAutoHide(getActivity(),zero_listview,zero_header,null,0);
-        initRefresh(view);
+       // zero_listview.setDividerHeight(10);
+     //   initRefresh(view);
         return view;
     }
 
@@ -106,12 +105,11 @@ public class ZeroFragment extends Fragment {
         }
 
         zero_header =  v.findViewById(R.id.zero_header);
-        swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.zero_refresh);
+  //      swipeRefreshLayout= (SwipeRefreshLayout) v.findViewById(R.id.zero_refresh);
         zero_header_image = (RoundImageView) v.findViewById(R.id.zero_header_headImg);
 
-        zero_header_name= (TextView) v.findViewById(R.id.zero_header_name);
-        zero_header_name.setText((String)SPUtils.get(getActivity(),"name",""));
-        zero_listview = (ListView) v.findViewById(R.id.zero_listview);
+
+        zero_recycleview = (RecyclerView) v.findViewById(R.id.zero_recycleview);
         zero_edit = (FloatingActionButton) v.findViewById(R.id.zero_edit);
         zero_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,12 +130,18 @@ public class ZeroFragment extends Fragment {
             @Override
             public void onSuccess(List<Zero> list) {
                 DialogUtils.dissmissProcess();
+                zeroAdapter =new ZeroAdapter(getActivity(),zeroList);
 
                 for (int i = 0; i < list.size(); i++) {
                     zeroList.add(list.get(i));
                     Log.d(TAG, "zeroList得到了数据——>" + zeroList.get(i).getZeroContent());
                     zeroAdapter.notifyDataSetChanged();
                 }
+
+                zeroAdapter.addData(zeroList);
+                zero_recycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
+                zero_recycleview.setAdapter(zeroAdapter);
+                setHeader(zero_recycleview);
             }
 
             @Override
@@ -159,7 +163,7 @@ public class ZeroFragment extends Fragment {
 
 
     }
-
+    /**
     private void initRefresh(final View view){
         swipeRefreshLayout.setColorSchemeResources(R.color.color_1,
                 R.color.color_2,
@@ -172,7 +176,7 @@ public class ZeroFragment extends Fragment {
         /*进度圈位置
         swipeRefreshLayout.setPadding(20, 20, 20, 20);
         swipeRefreshLayout.setProgressViewOffset(true, 100, 200);
-        swipeRefreshLayout.setDistanceToTriggerSync(50);*/
+        swipeRefreshLayout.setDistanceToTriggerSync(50);
         //实现下拉滚动效果，100是下拉的位置
         swipeRefreshLayout.setProgressViewEndTarget(true, 100);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -185,7 +189,7 @@ public class ZeroFragment extends Fragment {
 
 
 
-                        zero_listview.setSelection(0);
+
 
                         //刷新成功
                         mHandler.sendEmptyMessage(SUCCESS);
@@ -194,6 +198,7 @@ public class ZeroFragment extends Fragment {
         });
 
     }
+
 
     private Handler mHandler = new Handler(){
         @Override
@@ -216,7 +221,7 @@ public class ZeroFragment extends Fragment {
     };
 
 
-
+     **/
 
     private void initUserInfo() {
         //获取uri地址
@@ -238,6 +243,11 @@ public class ZeroFragment extends Fragment {
 
     }
 
-
+    private void setHeader(RecyclerView view){
+        View header = LayoutInflater.from(getActivity()).inflate(R.layout.view_zer0_header, view, false);
+        zero_header_name= (TextView) header.findViewById(R.id.zero_header_name);
+        zero_header_name.setText((String)SPUtils.get(getActivity(),"name",""));
+        zeroAdapter.setHeaderView(header);
+    }
 
 }

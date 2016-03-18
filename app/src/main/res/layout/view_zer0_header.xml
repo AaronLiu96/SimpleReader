@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/zero_header"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@mipmap/zero_background_header"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.android.simplereader.ui.widget.RoundImageView
+        android:id="@+id/zero_header_headImg"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/headimage" />
+
+    <TextView
+        android:id="@+id/zero_header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/zero_header_headImg"
+        android:text="Dragon"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+</RelativeLayout>
