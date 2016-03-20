@@ -129,16 +129,19 @@ public class ZeroFragment extends Fragment {
         query.findObjects(getActivity(), new FindListener<Zero>() {
             @Override
             public void onSuccess(List<Zero> list) {
-                DialogUtils.dissmissProcess();
-                zeroAdapter =new ZeroAdapter(getActivity(),zeroList);
+                Log.d(TAG, "list的大小—>" +list.size());
 
+                DialogUtils.dissmissProcess();
+                zeroAdapter =new ZeroAdapter(getActivity(),list);
+                Log.d(TAG, "第一次zeroList的大小—>" +zeroList.size());
                 for (int i = 0; i < list.size(); i++) {
                     zeroList.add(list.get(i));
                     Log.d(TAG, "zeroList得到了数据——>" + zeroList.get(i).getZeroContent());
                     zeroAdapter.notifyDataSetChanged();
                 }
+                Log.d(TAG, "第二次zeroList的大小—>" +zeroList.size());
 
-                zeroAdapter.addData(zeroList);
+               //zeroAdapter.addData(zeroList);
                 zero_recycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
                 zero_recycleview.setAdapter(zeroAdapter);
                 setHeader(zero_recycleview);

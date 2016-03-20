@@ -2,6 +2,7 @@ package com.android.simplereader.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ZeroAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mContext =context;
 
         dataLists = objects;
+        Log.d("ZeroNoDataProblem--->>", "构造函数里面dataLists—>" + dataLists.size());
     }
 
 
@@ -57,8 +59,11 @@ public class ZeroAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void  addData(List<Zero> datas){
+
+        Log.d("ZeroNoDataProblem--->>", "第一次Adapter里面的dataLists—>" + dataLists.size());
         dataLists.addAll(datas);
         notifyDataSetChanged();
+        Log.d("ZeroNoDataProblem--->>", "第二次Adapter里面的dataLists—>" + dataLists.size());
 
     }
     @Override
