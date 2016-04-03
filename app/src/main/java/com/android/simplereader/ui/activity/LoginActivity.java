@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.android.simplereader.R;
 import com.android.simplereader.app.BaseActivity;
+import com.android.simplereader.presenter.LoginActivityPresent;
+import com.android.simplereader.ui.view.ILoginActivityView;
 import com.android.simplereader.util.ActivityCollectorUtils;
 import com.android.simplereader.util.DialogUtils;
 import com.android.simplereader.util.SPUtils;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener,ILoginActivityView {
 
 
     @Bind(R.id.login_account_et)
@@ -34,7 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Bind(R.id.login_ToTourist)
     TextView login_ToTourist;
 
-
+    private LoginActivityPresent loginActivityPresent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         ActivityCollectorUtils.addActivity(this);
-        initOnClick();
+        loginActivityPresent = new LoginActivityPresent(this);
+        login_button.setOnClickListener(this);
+        login_ToRegister.setOnClickListener(this);
+        login_ToTourist.setOnClickListener(this);
     }
 
 
@@ -52,62 +57,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(final View v) {
         switch (v.getId()){
             case R.id.login_button:
-                final String account = login_account_et.getText().toString();
-                String password = login_password_et.getText().toString();
-                DialogUtils.onProcess(LoginActivity.this,"正在登陆","请稍后..");
-                BmobUser user = new BmobUser();
-                user.setUsername(account);
-                user.setPassword(password);
-                user.login(this, new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                          //在这里处理登录后的情况
-                        DialogUtils.dissmissProcess();
-                        SPUtils.put(LoginActivity.this, "is_login", true);
-                        SPUtils.put(LoginActivity.this, "name", account);
-                        Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
-                        ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                        startActivity(ToMainActivity);
-                        LoginActivity.this.finish();
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        DialogUtils.dissmissProcess();
-                        SPUtils.put(LoginActivity.this, "is_login", false);
-                        Snackbar.make(v, "账号或密码错误", Snackbar.LENGTH_SHORT)
-                                .setAction("再试一次~", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                    }
-                                }).show();
-                    }
-                });
-
-
+                loginActivityPresent.login(v);
                 break;
             case R.id.login_ToRegister:
-                Intent ToRegister = new Intent(LoginActivity.this,RegisterActivity.class);
-                ToRegister.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                startActivity(ToRegister);
-
+                loginActivityPresent.IntentToRegister();
                 break;
             case R.id.login_ToTourist:
-                SPUtils.put(LoginActivity.this, "is_login", false);
-                Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
-                ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                startActivity(ToMainActivity);
-                this.finish();
+                loginActivityPresent.IntentToTourist();
                 break;
         }
     }
 
-    private void initOnClick(){
-        login_button.setOnClickListener(this);
-        login_ToRegister.setOnClickListener(this);
-        login_ToTourist.setOnClickListener(this);
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -116,5 +77,55 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
+    @Override
+    public void toRegisterActivity() {
+        Intent ToRegister = new Intent(LoginActivity.this,RegisterActivity.class);
+        ToRegister.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(ToRegister);
+    }
 
+    @Override
+    public void toTourist() {
+        SPUtils.put(LoginActivity.this, "is_login", false);
+        Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
+        ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(ToMainActivity);
+        this.finish();
+    }
+
+    @Override
+    public void login(final View v) {
+        final String account = login_account_et.getText().toString();
+        String password = login_password_et.getText().toString();
+        DialogUtils.onProcess(LoginActivity.this,"正在登陆","请稍后..");
+        BmobUser user = new BmobUser();
+        user.setUsername(account);
+        user.setPassword(password);
+        user.login(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                //在这里处理登录后的情况
+                DialogUtils.dissmissProcess();
+                SPUtils.put(LoginActivity.this, "is_login", true);
+                SPUtils.put(LoginActivity.this, "name", account);
+                Intent ToMainActivity = new Intent(LoginActivity.this,MainActivity.class);
+                ToMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivity(ToMainActivity);
+                LoginActivity.this.finish();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                DialogUtils.dissmissProcess();
+                SPUtils.put(LoginActivity.this, "is_login", false);
+                Snackbar.make(v, "账号或密码错误", Snackbar.LENGTH_SHORT)
+                        .setAction("再试一次~", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
+            }
+        });
+    }
 }

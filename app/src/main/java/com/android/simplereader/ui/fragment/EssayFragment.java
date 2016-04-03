@@ -142,8 +142,14 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
     }
 
     private void httpRequest(int page){
-        DialogUtils.onProcess(getActivity(), "正在为您准备文章中...", "请稍后");
+    //    DialogUtils.onProcess(getActivity(), "正在为您准备文章中...", "请稍后");
+        swipeRefreshLayout.post(new Runnable() {
 
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
         OkHttpUtil.sendOKHttpRequestByHeader(Constants.essayAPI + "?typeId=&page=" + page + "&key=", new HttpCallbackListener() {
             @Override
             public void onSuccess(String response) {
@@ -152,12 +158,13 @@ public class EssayFragment extends Fragment implements AbsListView.OnScrollListe
                 message.obj = response;
                 messageHttp = response;
                 mHandler.sendMessage(message);
-                DialogUtils.dissmissProcess();
+       //         DialogUtils.dissmissProcess();
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Exception e) {
-                DialogUtils.dissmissProcess();
+       //         DialogUtils.dissmissProcess();
             }
         });
     }
